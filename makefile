@@ -8,9 +8,13 @@ tag = ${name}:${version}
 build:
 		pip install --editable .
 
+clean:
+		rm -r dist build k8vault.egg-info
+
 install:
 		python setup.py bdist_wheel
 		python -m pip install dist/*
+		twine check dist/*
 
 tag:
 		git tag ${version}

@@ -8,20 +8,20 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 # Version
-VERSION = (HERE / "Version").read_text()
+VERSION = open("Version").readline().rstrip()
 
 setup(
   name = 'k8vault',
   packages = ['k8vault'],
   version = VERSION,
-  license = 'GPL3',
-  description = 'Store and access kubernetes configuration files',
   long_description_content_type = 'text/markdown',
   long_description = README,
+  license = 'GPL3',
+  description = 'Store and access kubernetes configuration files',
   author = 'Joel Damata',
   author_email = 'joel.damata94@gmail.com',
   url = 'https://github.com/jdamata',
-  download_url = 'https://github.com/jdamata/k8s-vault/archive/{}.tar.gz'.format(VERSION),
+  download_url = 'https://github.com/jdamata/k8vault/archive/{}.tar.gz'.format(VERSION),
   keywords = ['Kubernetes', 'Config', 'Vault'],
   install_requires=[
           'click',
