@@ -9,7 +9,7 @@ build:
 		pip install --editable .
 
 install:
-	  python setup.py bdist_wheel
+		python setup.py bdist_wheel
 		python -m pip install dist/*
 
 tag:

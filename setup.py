@@ -15,7 +15,7 @@ setup(
   packages = ['k8vault'],
   version = VERSION,
   license = 'GPL3',
-  description = 'k8vault is a tool to securely store and access kubernetes configuration files development environment.',
+  description = 'k8vault is a tool to securely store and access kubernetes configuration files development environment',
   long_description_content_type = 'text/markdown',
   long_description = README,
   author = 'Joel Damata',

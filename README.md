@@ -1,23 +1,23 @@
 # k8s vault
-K8s Vault is a tool to securely store and access kubernetes configuration files development environment.
+k8vault is a tool to securely store and access kubernetes configuration files development environment.
 
-K8s Vault stores base64 encoded kubeconfigs in your operating system's secure keystore and then outputs them into ~/.kube/config. This means only a single kubeconfig file will be present on your local filesystem.
+k8vault stores base64 encoded kubeconfigs in your operating system's secure keystore and then outputs them into ~/.kube/config. This means only a single kubeconfig file will be present on your local filesystem.
 
 Currently there is no programmatic way to supply a kubeconfig to kubectl.
 
 ## Installing
-
+Install k8vault
 ```bash
-pip install k8s-vault
+pip install k8vault
 ```
 
 ## Basic Usage
-Add a kubeconfig to k8s-vault
+Add a kubeconfig to k8vault
 ```bash
-k8s-vault add ~/.kube/docker-for-desktop
+k8vault add ~/.kube/docker-for-desktop
 ```
 
-
+Switch to a kubeconfig
 ```bash
-k8s-vault exec docker-for-desktop
+k8vault exec docker-for-desktop
 ```
