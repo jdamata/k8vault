@@ -33,7 +33,7 @@ def get(configname):
     elif platform.system() == "Windows":
         get_windows_kubeconfig(configname)
     elif platform.system() == "Linux":
-        get_linux_kubeconfig(kubeconfig)
+        get_linux_kubeconfig(configname)
 
 if __name__ == '__main__':
     cli()
