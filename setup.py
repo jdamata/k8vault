@@ -26,7 +26,6 @@ setup(
   install_requires=[
           'click',
           'keyring',
-          'pywin32',
       ],
     entry_points='''
         [console_scripts]

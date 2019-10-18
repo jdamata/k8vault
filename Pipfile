@@ -9,7 +9,6 @@ verify_ssl = true
 click = "*"
 twine = "*"
 keyring = "*"
-pywin32 = "*"
 
 [requires]
 python_version = "3.6"
