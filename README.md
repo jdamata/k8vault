@@ -17,5 +17,5 @@ k8vault add ~/.kube/docker-for-desktop
 
 Switch to a kubeconfig
 ```bash
-k8vault exec docker-for-desktop
+k8vault get docker-for-desktop
 ```

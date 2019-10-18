@@ -25,10 +25,12 @@ setup(
   keywords = ['Kubernetes', 'Config', 'Vault'],
   install_requires=[
           'click',
+          'keyring',
+          'pywin32',
       ],
     entry_points='''
         [console_scripts]
-        k8vault = k8vault.__main__:k8vault
+        k8vault = k8vault.__main__:cli
     ''',
   classifiers=[
     'Development Status :: 3 - Alpha',
