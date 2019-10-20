@@ -41,6 +41,7 @@ def add_kubeconfig(kubeconfig):
         json.dump(k8vault_json, f)
     logger.info("Stored kubeconfig in {}".format(configname))
 
+
 def delete_kubeconfig(configname):
     # Delete kubeconfig from keychain
     keyring.delete_password("k8vault", configname)
@@ -63,6 +64,7 @@ def get_kubeconfig(configname):
         logger.info("Kubeconfig {} has been placed into {}".format(configname, kubeconfig_path))
     else:
         logger.info("Kubeconfig {} does not exist".format(configname))
+        raise SystemExit()
 
     # Set kubeconfig to active in .k8vault
     with open(k8vault_path, 'r') as f:
@@ -72,9 +74,13 @@ def get_kubeconfig(configname):
     with open(k8vault_path, 'w') as f:
         json.dump(k8vault_json, f)
 
+
 def list_kubeconfig():
     # List .k8vault file with kubeconfig name
-    with open(k8vault_path, "r") as f:
-        k8vault_json = json.load(f)
-        for key, value in k8vault_json.items():
-            print('{}: {}'.format(key, value))
+    try:
+      with open(k8vault_path, "r") as f:
+          k8vault_json = json.load(f)
+          for key, value in k8vault_json.items():
+              print('{}: {}'.format(key, value))
+    except IOError:
+        logger.error("K8vault file does not exist. Have you stored any kubeconfigs yet?")
