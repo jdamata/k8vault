@@ -28,3 +28,8 @@ Delete a kubeconfig
 ```bash
 k8vault delete docker-for-desktop
 ```
+
+Update a kubeconfig
+```bash
+k8vault update docker-for-desktop ~/.kube/docker-for-desktop
+```
