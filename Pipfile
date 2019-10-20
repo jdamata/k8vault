@@ -7,8 +7,8 @@ verify_ssl = true
 
 [packages]
 click = "*"
-twine = "*"
 keyring = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.7"
