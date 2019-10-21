@@ -26,6 +26,7 @@ setup(
   install_requires=[
           'click',
           'keyring',
+          'pyyaml',
       ],
     entry_points='''
         [console_scripts]
