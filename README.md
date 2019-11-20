@@ -1,6 +1,5 @@
 # k8vault
-k8vault is a tool to securely store and access kubernetes configuration files.  
-k8vault stores encoded kubeconfigs in your operating system's secure keystore and then outputs them into ~/.kube/config. This means only a single kubeconfig file needs to be present on your local filesystem.  
+k8vault is a tool to securely store and access kubernetes configuration files. It stores kubeconfigs in your operating system's secure keystore and then writes them to ~/.kube/config. For this to work, you need the KUBECONFIG env var to be pointed at ~/.kube/config.
 
 ## Installing
 Install k8vault
