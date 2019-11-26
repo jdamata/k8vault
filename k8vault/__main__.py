@@ -4,7 +4,7 @@ import click
 import logging
 import platform
 
-from .keyring import (add_kubeconfig, delete_kubeconfig, get_kubeconfig,
+from .core import (add_kubeconfig, delete_kubeconfig, get_kubeconfig,
   list_kubeconfig, update_kubeconfig)
 
 logging.basicConfig(format='[%(asctime)s] %(levelname)s - %(message)s', level=logging.INFO)
@@ -37,8 +37,8 @@ def list():
 @cli.command()
 @click.argument('configname')
 @click.argument('kubeconfig', type=click.Path(exists=True))
-def update(configname, kubeconfig):
-    update_kubeconfig(configname, kubeconfig)
+def update(kubeconfig, configname):
+    update_kubeconfig(kubeconfig, configname)
 
 if __name__ == '__main__':
     cli()
