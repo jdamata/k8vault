@@ -6,7 +6,7 @@ This has only been tested on macOS.
 ## Installing
 Install k8vault
 ```bash
-pip install k8vault
+pip3 install k8vault
 ```
 
 ## Basic Usage
