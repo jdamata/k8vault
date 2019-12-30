@@ -6,11 +6,13 @@ This has only been tested on macOS.
 ## Installing
 Install k8vault
 ```bash
-pip3 install k8vault --user
+go get -u github.com/jdamata/k8vault
 ```
 
 ## Basic Usage
-Add a kubeconfig to k8vault
+To use a custom keychain, specify --keychain
+
+Add a kubeconfig to the keyring
 ```bash
 k8vault add ~/.kube/docker-for-desktop
 ```
@@ -28,9 +30,4 @@ k8vault list
 Delete a kubeconfig
 ```bash
 k8vault delete docker-for-desktop
-```
-
-Update a kubeconfig
-```bash
-k8vault update docker-for-desktop ~/.kube/docker-for-desktop
 ```
