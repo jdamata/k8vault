@@ -10,7 +10,7 @@ go get -u github.com/jdamata/k8vault
 ```
 
 ## Basic Usage
-To use a custom keychain, specify --keychain
+To use a custom keychain, specify ```--keychain```
 
 Add a kubeconfig to the keyring
 ```bash
