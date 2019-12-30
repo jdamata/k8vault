@@ -19,9 +19,6 @@ var addCmd = &cobra.Command{
 func addKubeconfig(cmd *cobra.Command, args []string) {
 	ring := openRing("k8vault")
 
-	//TODO: validate kubeconfig name is valid
-	//TODO: validate kubeconfig name is not already in use
-
 	prompt := promptui.Prompt{
 		Label: "Give your kubeconfig a unique name: ",
 	}
@@ -30,17 +27,32 @@ func addKubeconfig(cmd *cobra.Command, args []string) {
 		log.Fatalf("Prompt failed %v\n", err)
 	}
 
-	// TODO: Validate kubeconfig file contents
+	if configExists(ring, kubeconfigName) {
+		log.Fatal("Kubeconfig name already exists. First delete the config if you would like to update it.")
+	}
+
+	//TODO: Validate kubeconfig file contents
 
 	data, err := ioutil.ReadFile(args[0])
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	_ = ring.Set(keyring.Item{
+	err = ring.Set(keyring.Item{
 		Key:  kubeconfigName,
 		Data: []byte(data),
 	})
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func configExists(ring keyring.Keyring, config string) bool {
+	item, _ := ring.Get(config)
+	if item.Data != nil {
+		return true
+	}
+	return false
 }
 
 func init() {
