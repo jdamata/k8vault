@@ -8,12 +8,13 @@ import (
 )
 
 var (
+	version  = "dev"
 	keychain string
 	rootCmd  = &cobra.Command{
 		Use:     "k8vault",
 		Short:   "Secure storage of kubeconfigs",
 		Long:    "K8vault is a CLI that allows secure storage of kubeconfigs in OS keystores.",
-		Version: "0.0.1",
+		Version: version,
 	}
 )
 
