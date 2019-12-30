@@ -9,25 +9,13 @@ You can grab a pre-compiled version of k8vault in the release tab or generate yo
 go get -u github.com/jdamata/k8vault
 ```
 
-## Basic Usage
-To use a custom keychain, specify ```--keychain```
-
-Add a kubeconfig to the keyring
+## Usage
 ```bash
-k8vault add ~/.kube/docker-for-desktop
-```
-
-Switch to a kubeconfig
-```bash
-k8vault get docker-for-desktop
-```
-
-List stored kubeconfigs
-```bash
-k8vault list
-```
-
-Delete a kubeconfig
-```bash
-k8vault delete docker-for-desktop
+  k8vault                                                    : Display usage
+  k8vault add ~/.kube/docker-for-desktop                     : Add a kubeconfig
+  k8vault add ~/.kube/docker-for-desktop --keychain jdamata  : Add a kubeconfig to the jdamata keychain
+  k8vault get docker-for-desktop                             : Get a kubeconfig named docker-for-desktop
+  k8vault list                                               : List kubeconfigs
+  k8vault delete docker-for-desktop                          : Delete a kubeconfig
+  k8vault delete --all --keychain jdamata                    : Delete all kubeconfigs in the jdamata keychain
 ```
