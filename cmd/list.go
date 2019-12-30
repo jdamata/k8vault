@@ -26,7 +26,6 @@ func listKubeconfig(cmd *cobra.Command, args []string) {
 
 func formattedList(keys []string) {
 	w := new(tabwriter.Writer)
-
 	w.Init(os.Stdout, 0, 8, 0, '\t', 0)
 	fmt.Fprintln(w, "KubeConfigs")
 	fmt.Fprintln(w, "----------------")

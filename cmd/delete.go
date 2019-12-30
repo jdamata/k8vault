@@ -21,7 +21,6 @@ var (
 
 func deleteKubeconfig(cmd *cobra.Command, args []string) {
 	ring := openRing("k8vault")
-
 	if viper.GetBool("deleteAll") {
 		keys, _ := ring.Keys()
 		if len(keys) < 1 {
@@ -34,7 +33,6 @@ func deleteKubeconfig(cmd *cobra.Command, args []string) {
 		}
 		os.Exit(0)
 	}
-
 	if len(args) == 1 {
 		deleteConfig(ring, args[0])
 	} else {

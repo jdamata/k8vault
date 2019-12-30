@@ -8,7 +8,6 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"k8s.io/client-go/tools/clientcmd"
-	//"k8s.io/client-go/tools/clientcmd/api"
 )
 
 var addCmd = &cobra.Command{
@@ -20,7 +19,6 @@ var addCmd = &cobra.Command{
 
 func addKubeconfig(cmd *cobra.Command, args []string) {
 	ring := openRing("k8vault")
-
 	prompt := promptui.Prompt{
 		Label: "Give your kubeconfig a unique name: ",
 	}
@@ -28,18 +26,14 @@ func addKubeconfig(cmd *cobra.Command, args []string) {
 	if err != nil {
 		log.Fatalf("Prompt failed %v\n", err)
 	}
-
 	if configExists(ring, kubeconfigName) {
 		log.Fatal("Kubeconfig name already exists. First delete the config if you would like to update it.")
 	}
-
 	validateKubeconfig(args[0])
-
 	data, err := ioutil.ReadFile(args[0])
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	err = ring.Set(keyring.Item{
 		Key:  kubeconfigName,
 		Data: []byte(data),
