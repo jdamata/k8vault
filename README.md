@@ -10,7 +10,9 @@ go get -u github.com/jdamata/k8vault
 ```
 
 ## Basic Usage
-Add a kubeconfig to k8vault
+To use a custom keychain, specify --keychain
+
+Add a kubeconfig to the keyring
 ```bash
 k8vault add ~/.kube/docker-for-desktop
 ```
@@ -29,9 +31,3 @@ Delete a kubeconfig
 ```bash
 k8vault delete docker-for-desktop
 ```
-
-Update a kubeconfig
-```bash
-k8vault update docker-for-desktop ~/.kube/docker-for-desktop
-```
-

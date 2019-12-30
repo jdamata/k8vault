@@ -36,9 +36,9 @@ func deleteKubeconfig(cmd *cobra.Command, args []string) {
 	}
 
 	if len(args) == 1 {
-		//TODO: validate args[0] name is a valid entry in k8vault keyring
 		deleteConfig(ring, args[0])
 	} else {
+		log.Error("Either config does not exists in the keyring or a config was not specified")
 		cmd.Help()
 	}
 }
