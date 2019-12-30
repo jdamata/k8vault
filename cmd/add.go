@@ -7,6 +7,8 @@ import (
 	"github.com/manifoldco/promptui"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"k8s.io/client-go/tools/clientcmd"
+	//"k8s.io/client-go/tools/clientcmd/api"
 )
 
 var addCmd = &cobra.Command{
@@ -31,7 +33,7 @@ func addKubeconfig(cmd *cobra.Command, args []string) {
 		log.Fatal("Kubeconfig name already exists. First delete the config if you would like to update it.")
 	}
 
-	//TODO: Validate kubeconfig file contents
+	validateKubeconfig(args[0])
 
 	data, err := ioutil.ReadFile(args[0])
 	if err != nil {
@@ -53,6 +55,14 @@ func configExists(ring keyring.Keyring, config string) bool {
 		return true
 	}
 	return false
+}
+
+func validateKubeconfig(kubeconfigPath string) {
+	config := clientcmd.GetConfigFromFileOrDie(kubeconfigPath)
+	err := clientcmd.Validate(*config)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func init() {
