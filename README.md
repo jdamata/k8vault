@@ -4,7 +4,7 @@ k8vault is a tool to securely store and access kubernetes configuration files. I
 This has only been tested on macOS.
 
 ## Installing
-Install k8vault
+You can grab a pre-compiled version of k8vault in the release tab or generate your own:
 ```bash
 go get -u github.com/jdamata/k8vault
 ```
