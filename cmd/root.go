@@ -8,18 +8,17 @@ import (
 )
 
 var (
-	version  = "dev"
 	keychain string
 	rootCmd  = &cobra.Command{
-		Use:     "k8vault",
-		Short:   "Secure storage of kubeconfigs",
-		Long:    "K8vault is a CLI that allows secure storage of kubeconfigs in OS keystores.",
-		Version: version,
+		Use:   "k8vault",
+		Short: "Secure storage of kubeconfigs",
+		Long:  "K8vault is a CLI that allows secure storage of kubeconfigs in OS keystores.",
 	}
 )
 
 // Execute executes the root command.
-func Execute() error {
+func Execute(version string) error {
+	rootCmd.Version = version
 	rootCmd.PersistentFlags().StringVarP(&keychain, "keychain", "k", "k8vault", "Name of the keychain to use")
 	viper.BindPFlag("keychain", rootCmd.Flags().Lookup("keychain"))
 	return rootCmd.Execute()

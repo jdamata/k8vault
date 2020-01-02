@@ -1,6 +1,6 @@
 export GO111MODULE=on
 VERSION=$(shell git describe --tags --candidates=1 --dirty)
-BUILD_FLAGS=-ldflags="-X main.Version=$(VERSION) -s -w" -trimpath
+BUILD_FLAGS=-ldflags="-X main.version=$(VERSION)"
 # CERT_ID ?= TODO
 SRC=$(shell find . -name '*.go')
 
