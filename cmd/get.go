@@ -17,7 +17,7 @@ var getCmd = &cobra.Command{
 }
 
 func getKubeconfig(cmd *cobra.Command, args []string) {
-	ring := openRing("k8vault")
+	ring := openRing(keychain)
 	key, err := ring.Get(args[0])
 	if err != nil {
 		log.Fatal(err)

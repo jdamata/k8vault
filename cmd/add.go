@@ -18,7 +18,7 @@ var addCmd = &cobra.Command{
 }
 
 func addKubeconfig(cmd *cobra.Command, args []string) {
-	ring := openRing("k8vault")
+	ring := openRing(keychain)
 	prompt := promptui.Prompt{
 		Label: "Give your kubeconfig a unique name: ",
 	}

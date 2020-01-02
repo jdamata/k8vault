@@ -16,7 +16,7 @@ var listCmd = &cobra.Command{
 }
 
 func listKubeconfig(cmd *cobra.Command, args []string) {
-	ring := openRing("k8vault")
+	ring := openRing(keychain)
 	keys, err := ring.Keys()
 	if err != nil {
 		log.Fatal(err)
