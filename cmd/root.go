@@ -38,7 +38,7 @@ func openRing(KeychainName string) keyring.Keyring {
 		KeychainName:             KeychainName,
 	})
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Failed to open keyring\n", err)
 	}
 	return ring
 }

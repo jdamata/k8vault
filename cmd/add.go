@@ -32,14 +32,14 @@ func addKubeconfig(cmd *cobra.Command, args []string) {
 	validateKubeconfig(args[0])
 	data, err := ioutil.ReadFile(args[0])
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Failed to read kubeconfig from disk\n", err)
 	}
 	err = ring.Set(keyring.Item{
 		Key:  kubeconfigName,
 		Data: []byte(data),
 	})
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Failed to add kubeconfig to keyring\n", err)
 	}
 }
 
@@ -55,7 +55,7 @@ func validateKubeconfig(kubeconfigPath string) {
 	config := clientcmd.GetConfigFromFileOrDie(kubeconfigPath)
 	err := clientcmd.Validate(*config)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Failed to validate kubeconfig\n", err)
 	}
 }
 

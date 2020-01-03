@@ -56,7 +56,7 @@ func yesNo() bool {
 func deleteConfig(ring keyring.Keyring, config string) {
 	err := ring.Remove(config)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Failed to delete kubeconfig\n", err)
 	}
 	log.Info("Deleted config: ", config)
 }
