@@ -48,12 +48,12 @@ func purgeAll(ring keyring.Keyring) {
 
 func deleteConfig(ring keyring.Keyring, config string) {
 	result := prompt(fmt.Sprintf("Do you want to delete config %s? Select[Yes/No]", config))
-	if result == "yes" {
+	if result == "Yes" {
 		err := ring.Remove(config)
 		if err != nil {
 			log.Fatalf("Failed to delete kubeconfig: %v\n", err)
 		}
-		log.Info("Deleted config: ", config)
+		log.Infof("Deleted config: %v\n", config)
 	}
 }
 
