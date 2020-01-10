@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/99designs/keyring"
@@ -22,43 +23,50 @@ var (
 func deleteKubeconfig(cmd *cobra.Command, args []string) {
 	ring := openRing(keychain)
 	if viper.GetBool("deleteAll") {
-		keys, _ := ring.Keys()
-		if len(keys) < 1 {
-			log.Fatal("There are no configs to delete")
-		}
-		if yesNo() {
-			for _, config := range keys {
-				deleteConfig(ring, config)
-			}
-		}
-		os.Exit(0)
+		purgeAll(ring)
 	}
 	if len(args) == 1 {
 		deleteConfig(ring, args[0])
 	} else {
-		log.Error("Either config does not exists in the keyring or a config was not specified")
 		cmd.Help()
 	}
 }
 
-func yesNo() bool {
+func purgeAll(ring keyring.Keyring) {
+	keys, _ := ring.Keys()
+	if len(keys) < 1 {
+		log.Fatal("There are no configs to delete")
+	}
+	result := prompt("Do you want to purge all kubeconfigs? Select[Yes/No]")
+	if result == "yes" {
+		for _, config := range keys {
+			deleteConfig(ring, config)
+		}
+	}
+	os.Exit(0)
+}
+
+func deleteConfig(ring keyring.Keyring, config string) {
+	result := prompt(fmt.Sprintf("Do you want to delete config %s? Select[Yes/No]", config))
+	if result == "yes" {
+		err := ring.Remove(config)
+		if err != nil {
+			log.Fatal("Failed to delete kubeconfig\n", err)
+		}
+		log.Info("Deleted config: ", config)
+	}
+}
+
+func prompt(message string) string {
 	prompt := promptui.Select{
-		Label: "Do you want to purge all kubeconfigs? Select[Yes/No]",
+		Label: message,
 		Items: []string{"Yes", "No"},
 	}
 	_, result, err := prompt.Run()
 	if err != nil {
 		log.Fatalf("Prompt failed %v\n", err)
 	}
-	return result == "Yes"
-}
-
-func deleteConfig(ring keyring.Keyring, config string) {
-	err := ring.Remove(config)
-	if err != nil {
-		log.Fatal("Failed to delete kubeconfig\n", err)
-	}
-	log.Info("Deleted config: ", config)
+	return result
 }
 
 func init() {
