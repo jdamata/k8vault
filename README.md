@@ -18,11 +18,6 @@ go get -u github.com/jdamata/k8vault
   k8vault delete --all --keychain jdamata                    : Delete all kubeconfigs in the jdamata keychain
 ```
 
-
-## FAQ
-
-Q: Seeing this error when attempted to use k8vault on windows "The stub received bad data."
-A: K8vault doesn't support Windows Credential Manager due to its maximum password length of 127 characters.
-
-Q: We want to prevent storing any kubeconfigs, even ~/.kube/config like k8vault does.
-A: Currently kubectl doesn't support this. Something like this would enable us to do this: https://github.com/kubernetes/kubectl/pull/590
+## Known Issues
+- K8vault doesn't support Windows Credential Manager due to the maximum password length of 127 characters.
+- We currently store the actively used kubeconfig in ~/.kube/config. It would be better if nothing neeeded to be dropped into the filesystem. Something like a base64 encoded kubeconfig stored as an environment variable might work. Currently kubectl doesn't support this. More info here: https://github.com/kubernetes/kubectl/pull/590
