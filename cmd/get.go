@@ -20,7 +20,7 @@ func getKubeconfig(cmd *cobra.Command, args []string) {
 	ring := openRing(keychain)
 	key, err := ring.Get(args[0])
 	if err != nil {
-		log.Fatal("Failed to get kubeconfig\n", err)
+		log.Fatalf("Failed to get kubeconfig: %v\n", err)
 	}
 	writeKubeconfig(key.Data)
 }
@@ -28,11 +28,11 @@ func getKubeconfig(cmd *cobra.Command, args []string) {
 func writeKubeconfig(data []byte) {
 	home, err := homedir.Dir()
 	if err != nil {
-		log.Fatal("Failed to obtain home directory\n", err)
+		log.Fatalf("Failed to obtain home directory: %v\n", err)
 	}
 	err = ioutil.WriteFile(fmt.Sprintf("%s/.kube/config", home), data, 0640)
 	if err != nil {
-		log.Fatal("Failed to write kubeconfig to .kube/config\n", err)
+		log.Fatalf("Failed to write kubeconfig to .kube/config: %v\n", err)
 	}
 }
 

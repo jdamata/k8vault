@@ -24,7 +24,7 @@ func addKubeconfig(cmd *cobra.Command, args []string) {
 	}
 	kubeconfigName, err := prompt.Run()
 	if err != nil {
-		log.Fatalf("Prompt failed %v\n", err)
+		log.Fatalf("Prompt failed: %v\n", err)
 	}
 	if configExists(ring, kubeconfigName) {
 		log.Fatal("Kubeconfig name already exists. First delete the config if you would like to update it.")
@@ -32,14 +32,14 @@ func addKubeconfig(cmd *cobra.Command, args []string) {
 	validateKubeconfig(args[0])
 	data, err := ioutil.ReadFile(args[0])
 	if err != nil {
-		log.Fatal("Failed to read kubeconfig from disk\n", err)
+		log.Fatalf("Failed to read kubeconfig from disk: %v\n", err)
 	}
 	err = ring.Set(keyring.Item{
 		Key:  kubeconfigName,
 		Data: []byte(data),
 	})
 	if err != nil {
-		log.Fatal("Failed to add kubeconfig to keyring\n", err)
+		log.Fatalf("Failed to add kubeconfig to keyring: %v\n", err)
 	}
 }
 
@@ -55,7 +55,7 @@ func validateKubeconfig(kubeconfigPath string) {
 	config := clientcmd.GetConfigFromFileOrDie(kubeconfigPath)
 	err := clientcmd.Validate(*config)
 	if err != nil {
-		log.Fatal("Failed to validate kubeconfig\n", err)
+		log.Fatalf("Failed to validate kubeconfig: %v\n", err)
 	}
 }
 

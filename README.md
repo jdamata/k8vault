@@ -1,8 +1,6 @@
 # k8vault
 k8vault is a tool to securely store and access kubernetes configuration files. It stores kubeconfigs in your operating system's secure keystore and then writes them to ~/.kube/config. For this to work, you need the KUBECONFIG env var pointed at ~/.kube/config.
 
-This has only been tested on macOS.
-
 ## Installing
 You can grab a pre-compiled version of k8vault in the release tab or generate your own:
 ```bash
@@ -19,3 +17,12 @@ go get -u github.com/jdamata/k8vault
   k8vault delete docker-for-desktop                          : Delete a kubeconfig
   k8vault delete --all --keychain jdamata                    : Delete all kubeconfigs in the jdamata keychain
 ```
+
+
+## FAQ
+
+Q: Seeing this error when attempted to use k8vault on windows "The stub received bad data."
+A: K8vault doesn't support Windows Credential Manager due to its maximum password length of 127 characters.
+
+Q: We want to prevent storing any kubeconfigs, even ~/.kube/config like k8vault does.
+A: Currently kubectl doesn't support this. Something like this would enable us to do this: https://github.com/kubernetes/kubectl/pull/590

@@ -32,13 +32,26 @@ func logging() {
 }
 
 func openRing(KeychainName string) keyring.Keyring {
+	var allowedbackends = []keyring.BackendType{
+		keyring.KeychainBackend,
+		keyring.SecretServiceBackend,
+		keyring.KWalletBackend,
+		keyring.PassBackend,
+		keyring.FileBackend,
+	}
+		
 	ring, err := keyring.Open(keyring.Config{
+		AllowedBackends:          allowedbackends,
 		ServiceName:              "k8vault",
-		KeychainTrustApplication: false,
+		KeychainTrustApplication: true,
 		KeychainName:             KeychainName,
-	})
+		FileDir:                  "~/.k8vault/keys/",
+		KWalletAppID:             "k8vault",
+		KWalletFolder:            "k8vault",
+		LibSecretCollectionName:  "k8vault",
+})
 	if err != nil {
-		log.Fatal("Failed to open keyring\n", err)
+		log.Fatalf("Failed to open keyring: %v\n", err)
 	}
 	return ring
 }

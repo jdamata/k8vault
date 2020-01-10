@@ -19,7 +19,7 @@ func listKubeconfig(cmd *cobra.Command, args []string) {
 	ring := openRing(keychain)
 	keys, err := ring.Keys()
 	if err != nil {
-		log.Fatal("Failed listing keys\n", err)
+		log.Fatalf("Failed listing keys: %v\n", err)
 	}
 	formattedList(keys)
 }

@@ -51,7 +51,7 @@ func deleteConfig(ring keyring.Keyring, config string) {
 	if result == "yes" {
 		err := ring.Remove(config)
 		if err != nil {
-			log.Fatal("Failed to delete kubeconfig\n", err)
+			log.Fatalf("Failed to delete kubeconfig: %v\n", err)
 		}
 		log.Info("Deleted config: ", config)
 	}
@@ -64,7 +64,7 @@ func prompt(message string) string {
 	}
 	_, result, err := prompt.Run()
 	if err != nil {
-		log.Fatalf("Prompt failed %v\n", err)
+		log.Fatalf("Prompt failed: %v\n", err)
 	}
 	return result
 }
