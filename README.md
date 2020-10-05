@@ -20,4 +20,4 @@ go get -u github.com/jdamata/k8vault
 
 ## Known Issues
 - K8vault doesn't support Windows Credential Manager due to the maximum password length of 127 characters.
-- We currently store the actively used kubeconfig in ~/.kube/config. It would be better if nothing neeeded to be dropped into the filesystem. Something like a base64 encoded kubeconfig stored as an environment variable might work. Currently kubectl doesn't support this. More info here: https://github.com/kubernetes/kubectl/pull/590
+- We store the actively used kubeconfig in ~/.kube/config. It would be better if nothing neeeded to be dropped into the filesystem. Something like a base64 encoded kubeconfig stored as an environment variable might work. Currently kubectl doesn't support this. More info here: https://github.com/kubernetes/kubernetes/issues/93346
